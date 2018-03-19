@@ -1,4 +1,4 @@
-# Chennaipy Website
+# Sri Ramana Vidya Peedam Ashram Website
 
 [![Build Status](https://travis-ci.org/Chennaipy/website.svg?branch=master)](https://travis-ci.org/Chennaipy/website)
 
