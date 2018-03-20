@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Chennaipy/website.svg?branch=master)](https://travis-ci.org/Chennaipy/website)
 
-This is the repo for the Chennai Python User Group's website
+This is the repo for the Sri Ramana Vidya Peedam Ashram website
 [http://www.sriramanavidyapeedam.org](http://www.sriramanavidyapeedam.org). The site is built
 using Pelican, a static site generator, powered by Python. The
 site's theme is based on [Backdrop Pelican Theme](https://github.com/getpelican/pelican-themes/tree/master/backdrop).
