@@ -11,7 +11,7 @@ TIMEZONE = 'Asia/Kolkata'
 DEFAULT_LANG = 'English'
 
 # Pagination Enabled
-PAGINATED_DIRECT_TEMPLATES = ('categories', 'archives')
+PAGINATED_DIRECT_TEMPLATES = ('archives')
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
