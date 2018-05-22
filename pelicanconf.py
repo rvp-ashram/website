@@ -7,10 +7,11 @@ SITENAME = 'Sri Ramana Vidya Peedam'
 SITEURL = ''
 
 PATH = 'content'
-
 TIMEZONE = 'Asia/Kolkata'
-
 DEFAULT_LANG = 'English'
+
+# Pagination Enabled
+PAGINATED_DIRECT_TEMPLATES = ('categories', 'archives')
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -33,9 +34,6 @@ DEFAULT_PAGINATION = 10
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
-
-# Pagination Enabled
-PAGINATED_DIRECT_TEMPLATES = ('categories', 'archives')
 
 #Backdrop Theme
 SITESUBTITLE = u'A place for holistic living and self inquiry'
