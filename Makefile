@@ -115,6 +115,9 @@ ftp_upload: publish
 ftp_direct_upload: publish
 	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -a --parallel=10 --only-newer --loop -vvv -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
+ftp_file_upload: publish
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "tar zxvf output.tgz $(FTP_TARGET_DIR)"
+
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
 
