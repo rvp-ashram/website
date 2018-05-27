@@ -113,7 +113,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -a --parallel=10 --only-newer --loop -vvv -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -a --parallel=10 --only-newer -vvvv -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_file_upload: publish
 	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "tar zxvf output.tgz $(FTP_TARGET_DIR)"
