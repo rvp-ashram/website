@@ -11,7 +11,7 @@ THEMECONF=$(BASEDIR)/themes/backdrop
 
 FTP_HOST=sriramanavidyapeedam.org
 FTP_USER=pelican@sriramanavidyapeedam.org
-FTP_TARGET_DIR=/
+FTP_TARGET_DIR=/html
 
 SSH_HOST=localhost
 SSH_PORT=22
@@ -113,7 +113,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR)/html ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
