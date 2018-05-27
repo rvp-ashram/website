@@ -1,9 +1,12 @@
 language: python
 python:
-  - '3.6'
+- '3.6'
 before_install:
-  - sudo apt-get update -qq
+- sudo apt-get update -qq
 install:
-  - pip install -r requirements.txt 
-  - sudo apt-get install openssh-client sshpass rsync
+- pip install -r requirements.txt
+- sudo apt-get install openssh-client sshpass rsync
 script: make publish
+env:
+  global:
+    secure: Eguvo5KMQd93seuHEQvo+zeXlky+/tDQTaQvJKBAli6I8VkWkNnmeMkQSYbJrRA3/Nm8BHd471IwYhO1k9cyEVY26oQ00EJRWLcGs+SGE51sPbBxFGPnna/qMJ2WtlvC2R6Rc/iwf4N5qEisM2sqiDqGUrIU7ovBAjl4tiiaJF6v9K9omS6dIverdU3PVQc728AXIkUvDbQWdAgSXzz2lfll663rhgnWChOI/BEMvh06Tn/g4WGR4tYvQtLz2oxIZOj3a388ExGxodv7uCFMr9z/RgoHEH5dD97dUaZYTx1VMzgkrSjVCEQ0NDoh6bnR1Ilhp9kGj1dL71F+iaEv2GirAsno2zBoENktJ6ugRDURnKwhAHXOxMNPvelabuDxct5L34ldqsKhYPkJe8B5dmO9TDWcqhXDgK3OROYVGDeLgEZn8h+Pd/4Wm+NhpNzxBAf1zlyaEHKZ2GGjcTQKBcLmXQ0LOAC07mpv5Yh3b5DdoErAe6bgmlTZ8vsbIw5M++liorL/KBKLqSqje4mNunKTy6e8Nq68A4Cf8mEUb8nINGP2+rzXRAGZdExqoD2Dc6RCEayqyrdFXZzev66440FgqfuYTqNBunZL0UNE3XwmV5CfCV3q0W3LO7fWvxDP7iRS6SagOMWlnb7OM1pnwTO1rq3JbwUK764wm+D09Q0=
