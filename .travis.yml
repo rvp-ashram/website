@@ -5,7 +5,7 @@ before_install:
 - sudo apt-get update -qq
 install:
 - pip install -r requirements.txt
-- sudo apt-get install openssh-client sshpass rsync lftp gnu-tls
+- sudo apt-get install openssh-client sshpass rsync lftp
 - mkdir ~/.lftp
 script: make publish
 env:
