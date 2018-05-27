@@ -15,5 +15,5 @@ after_success:
 - echo -e "Host sriramanavidyapeedam.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - echo -e "set cmd:parallel 1\nset cmd:queue-parallel 1\nset cmd:time-style "%b %e %Y|%b %e %H:%M"\nset cache:cache-empty-listings false\nset cache:enable yes\nset cache:expire 2h\n set cache:expire-negative 2h\nset cache:size 512\nset cmd:remote-completion yes\nset cmd:verify-host yes\nset cmd:verify-path no\nset cmd:verify-path-cached no\nset ftp:sync-mode yes\nset ftp:ssl-auth TLS\nset ftp:ssl-force true\nset ftp:ssl-protect-data true\nset ssl:check-hostname false\nset ssl:verify-certificate no\n" >> ~/.lftp/rc
 - tar -gzcf output.tgz /home/travis/build/rvp-ashram/website/output
-- test "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" && make ftp_file_upload || false
+- test "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" && make ftp_direct_upload || false
 
