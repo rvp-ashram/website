@@ -113,7 +113,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -a --parallel=5 --ignore-size -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -a --parallel=9 --ignore-size --only-newer --no-overwrite --loop -v -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
