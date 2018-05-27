@@ -14,4 +14,5 @@ env:
 after_success:
 - echo -e "Host sriramanavidyapeedam.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - echo -e "set ftp:ssl-auth TLS\nset ftp:ssl-force true\nset ftp:ssl-protect-data true\nset ssl:check-hostname false\nset ssl:verify-certificate no\n" >> ~/.lftp/rc
+- tar -gzcf output.tgz /home/travis/build/rvp-ashram/website/output
 - test "${TRAVIS_PULL_REQUEST}" = "false" -a "${TRAVIS_BRANCH}" = "master" && make ftp_direct_upload || false
