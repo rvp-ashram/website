@@ -117,7 +117,7 @@ ftp_direct_upload: publish
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag ; quit"
-	lftp -c "open -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST); set ssl:verify-certificate no; mirror -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages;quit"
+	lftp -c "open -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST); set ssl:verify-certificate no; mirror --verbose -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages;quit"
 
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
