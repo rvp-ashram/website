@@ -11,7 +11,7 @@ THEMECONF=$(BASEDIR)/themes/backdrop
 
 FTP_HOST=sriramanavidyapeedam.org
 FTP_USER=pelican@sriramanavidyapeedam.org
-FTP_TARGET_DIR=/
+FTP_TARGET_DIR=./
 
 SSH_HOST=localhost
 SSH_PORT=22
