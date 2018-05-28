@@ -113,7 +113,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "set ftp:sync-mode yes; set cmd:verify-path-cached no; set cmd:verify-path no;set cmd:verify-host yes;set cmd:remote-completion yes;set cache:size 1024; set cache:expire-negative 1h; set cache:expire 1h; set cache:enable yes; set cache:cache-empty-listings false; set cmd:queue-parallel 5; set cmd:parallel 5; set ftp:use-mlsd on; set ftp:use-mdtm off; set ssl:verify-certificate no; set ftp:sync-mode yes; set ssl:check-hostname false; set ftp:ssl-protect-data true; set ftp:ssl-force true;set ftp:ssl-auth TLS; set mirror:parallel-transfer-count 5; set ftp:passive-mode 1; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag ; quit"
