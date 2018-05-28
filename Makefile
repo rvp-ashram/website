@@ -113,10 +113,10 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages ; quit"
-	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
-	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author ; quit"
-	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -p 21 -e "mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages ; quit"
+	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
+	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author ; quit"
+	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag ; quit"
 	
 
 s3_upload: publish
