@@ -114,11 +114,10 @@ ftp_upload: publish
 
 ftp_direct_upload: publish
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 10; set cache:expire 1h; set cache:enable yes; set cache:cache-empty-listings false; set cmd:queue-parallel 5; set cmd:parallel 5; set ftp:use-mlsd on; set ftp:use-mdtm off; set ssl:verify-certificate no; set ftp:sync-mode yes; set ssl:check-hostname false; set ftp:ssl-protect-data true; set ftp:ssl-force true; set ftp:ssl-auth TLS; set mirror:parallel-transfer-count 5; set ftp:passive-mode 1; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages ; quit"
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 5; set ftp:use-mlsd on; set ftp:use-mdtm off; set ssl:verify-certificate no; set ftp:sync-mode yes; set ssl:check-hostname false; set ftp:ssl-protect-data true; set ftp:ssl-force true; set ftp:ssl-auth TLS; set mirror:parallel-transfer-count 5; set ftp:passive-mode 1; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 5; set ftp:use-mlsd on; set ftp:use-mdtm off; set ssl:verify-certificate no; set ftp:sync-mode yes; set ssl:check-hostname false; set ftp:ssl-force true; set ftp:ssl-auth TLS; set ftp:passive-mode 1; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author ; quit"
 	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag ; quit"
 	
-
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
 
