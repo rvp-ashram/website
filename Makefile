@@ -12,6 +12,7 @@ THEMECONF=$(BASEDIR)/themes/backdrop
 FTP_HOST=sriramanavidyapeedam.org
 FTP_USER=pelican@sriramanavidyapeedam.org
 FTP_TARGET_DIR=.
+LFTP_CONF=set ssl:verify-certificate no; set ssl:check-hostname false; set -a;
 
 SSH_HOST=localhost
 SSH_PORT=22
@@ -113,7 +114,7 @@ ftp_upload: publish
 	lftp ftp://$(FTP_USER)@$(FTP_HOST) -e "mirror -R $(OUTPUTDIR) $(FTP_TARGET_DIR) ; quit"
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -d -e "set ftp:use-stat-for-list yes;set ssl:verify-certificate no; set ssl:check-hostname false; set -a; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -d -e "set ssl:verify-certificate no; set ssl:check-hostname false; set -a; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag; quit"
 
 s3_upload: publish
 	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
