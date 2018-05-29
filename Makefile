@@ -9,8 +9,6 @@ CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 THEMECONF=$(BASEDIR)/themes/backdrop
 
-LFTP_CONF=set ssl:verify-certificate no; set ssl:check-hostname false; set -a;
-
 FTP_HOST=sriramanavidyapeedam.org
 FTP_USER=pelican@sriramanavidyapeedam.org
 FTP_TARGET_DIR=.
@@ -101,20 +99,6 @@ stopserver:
 
 publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS) -t $(THEMECONF)
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -d -e "$(LFTP_CONF);mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category; quit"
-	#; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag
-
-s3_upload: publish
-	s3cmd sync $(OUTPUTDIR)/ s3://$(S3_BUCKET) --acl-public --delete-removed --guess-mime-type --no-mime-magic --no-preserve
-
-cf_upload: publish
-	cd $(OUTPUTDIR) && swift -v -A https://auth.api.rackspacecloud.com/v1.0 -U $(CLOUDFILES_USERNAME) -K $(CLOUDFILES_API_KEY) upload -c $(CLOUDFILES_CONTAINER) .
-
-github: publish
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
-	git push origin $(GITHUB_PAGES_BRANCH)
-
-.PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
 
 ssh_upload: publish
 	scp -P $(SSH_PORT) -r $(OUTPUTDIR)/* $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR)
