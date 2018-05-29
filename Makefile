@@ -107,7 +107,7 @@ rsync_upload: publish
 	rsync -e "ssh -p $(SSH_PORT)" -P -rvzc --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR) --cvs-exclude
 
 ftp_direct_upload: publish
-	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -d -e "set ssl:verify-certificate no; set ssl:check-hostname false; set -a; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -d -e "set ssl:verify-certificate no; set ssl:check-hostname false; set ftp:ssl-force true; set ftp:ssl-protect-data on; set -a; mirror -n --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; mirror -n --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag; quit"
 
 github: publish
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
