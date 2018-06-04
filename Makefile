@@ -107,8 +107,9 @@ rsync_upload: publish
 	rsync -e "ssh -p $(SSH_PORT)" -P -rvzc --delete $(OUTPUTDIR)/ $(SSH_USER)@$(SSH_HOST):$(SSH_TARGET_DIR) --cvs-exclude
 
 ftp_direct_upload: publish
-	#lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 5;-a --parallel=5; ssl-protect-data on; set ssl:verify-certificate no; set ssl:check-hostname false; set ftp:ssl-force true; set ftp:ssl-protect-data on; set -a; mirror --verbose=2 -R $(OUTPUTDIR)/category $(FTP_TARGET_DIR)/category ; mirror --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; mirror -R $(OUTPUTDIR)/author $(FTP_TARGET_DIR)/author; mirror -R $(OUTPUTDIR)/tag $(FTP_TARGET_DIR)/tag; quit"
-        lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 5;-a --parallel=5; ssl-protect-data on; set ssl:verify-certificate no; set ssl:check-hostname false; set ftp:ssl-force true; set ftp:ssl-protect-data on; set ftp:ssl-allow off; mirror --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; quit"
+	lftp -u $(FTP_USER),$(LFTP_PASSWORD) $(FTP_HOST) -e "debug 5;-a --parallel=5; ssl-protect-data on; set ssl:verify-certificate no; set ssl:check-hostname false; set ftp:ssl-force true; set ftp:ssl-protect-data on; set ftp:ssl-allow off;set ftp:ssl-allow true; set ftp:ssl-force true; set ftp:ssl-protect-data true; set ftp:ssl-protect-list true; set ssl:priority NORMAL:+VERS-TLS1.1:+VERS-TLS1.2
+; mirror --verbose=2 -R $(OUTPUTDIR)/pages $(FTP_TARGET_DIR)/pages; quit"
+	
 github: publish
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
 	git push origin $(GITHUB_PAGES_BRANCH)
