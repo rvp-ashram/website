@@ -9,7 +9,7 @@ CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
 THEMECONF=$(BASEDIR)/themes/backdrop
 
-FTP_HOST=sriramanavidyapeedam.org
+FTP_HOST=43.255.154.95
 FTP_USER=pelican@sriramanavidyapeedam.org
 FTP_TARGET_DIR=.
 
